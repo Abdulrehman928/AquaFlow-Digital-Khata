@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Driver Dashboard - Aqua Flow</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../core/global.css" />
+    <link rel="stylesheet" href="./driver.css" />
+    <script
+      src="https://unpkg.com/html5-qrcode"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body class="pb-5 bg-light-blue">
+    <header class="sticky-top glass-header border-bottom shadow-sm">
+      <div class="container py-3">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-2 me-2">
+              <i class="bi bi-droplet-fill text-primary fs-4"></i>
+              <span class="fw-bold text-primary font-poppins d-none d-sm-inline"
+                >Aqua Flow</span
+              >
+            </div>
+            <div class="driver-avatar shadow-sm">
+              <img
+                src="https://ui-avatars.com/api/?name=Driver+One&background=0077b6&color=fff"
+                alt="Driver"
+                class="rounded-circle"
+                width="45"
+                height="45"
+              />
+              <span class="status-dot"></span>
+            </div>
+            <div>
+              <h6 class="m-0 fw-bold text-dark font-poppins">Hi, Mike!</h6>
+              <small class="text-muted d-block" style="font-size: 0.75rem"
+                >Route #42 • Downtown</small
+              >
+            </div>
+          </div>
+          <button
+            class="btn btn-icon btn-light rounded-circle shadow-sm position-relative"
+            id="notificationBtn"
+          >
+            <i class="bi bi-bell"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"
+            >
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container py-4 mb-5">
+      <section class="mb-4">
+        <div class="d-flex gap-3 overflow-auto pb-2 no-scrollbar">
+          <button
+            class="btn btn-primary-custom flex-grow-1 py-3 shadow-sm d-flex flex-column align-items-center gap-2"
+            data-bs-toggle="modal"
+            data-bs-target="#qrScanModal"
+          >
+            <i class="bi bi-qr-code-scan fs-3"></i>
+            <span class="small fw-semibold">Scan Gate</span>
+          </button>
+
+          <button
+            class="btn btn-white-glass flex-grow-1 py-3 shadow-sm d-flex flex-column align-items-center gap-2"
+            data-bs-toggle="modal"
+            data-bs-target="#issueModal"
+          >
+            <i class="bi bi-exclamation-triangle text-warning fs-3"></i>
+            <span class="small fw-semibold">Report Issue</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="mb-4">
+        <div class="glass-card p-4 position-relative overflow-hidden">
+          <div class="blob-bg"></div>
+          <div class="position-relative z-1">
+            <div class="d-flex justify-content-between align-items-end mb-2">
+              <div>
+                <small
+                  class="text-muted text-uppercase fw-bold"
+                  style="font-size: 0.7rem"
+                  >Today's Progress</small
+                >
+                <h2
+                  class="fw-bold m-0 mt-1 font-poppins text-primary"
+                  id="progressPercentage"
+                >
+                  0%
+                </h2>
+              </div>
+              <div class="text-end">
+                <h5 class="m-0 fw-bold text-dark" id="completedCount">0/0</h5>
+                <small class="text-success fw-medium" id="progressStatus"
+                  >Starting</small
+                >
+              </div>
+            </div>
+            <div
+              class="progress"
+              style="height: 8px; background: rgba(0, 0, 0, 0.05)"
+            >
+              <div
+                class="progress-bar bg-gradient-primary"
+                id="progressBar"
+                role="progressbar"
+                style="width: 0%; border-radius: 4px"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="text-secondary fw-bold text-uppercase m-0 ps-1">
+            Bottle Management
+          </h6>
+        </div>
+        <div class="row g-2">
+          <div class="col-4">
+            <div class="glass-card p-2 text-center py-3 h-100">
+              <i class="bi bi-box-seam text-primary fs-4 mb-1 d-block"></i>
+              <h5 class="fw-bold m-0" id="bottlesDelivered">0</h5>
+              <small class="text-muted" style="font-size: 0.7rem"
+                >Delivered</small
+              >
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="glass-card p-2 text-center py-3 h-100">
+              <i class="bi bi-arrow-repeat text-success fs-4 mb-1 d-block"></i>
+              <h5 class="fw-bold m-0" id="bottlesCollected">0</h5>
+              <small class="text-muted" style="font-size: 0.7rem"
+                >Collected</small
+              >
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="glass-card p-2 text-center py-3 h-100 position-relative"
+            >
+              <span
+                class="position-absolute top-0 end-0 p-1"
+                id="pendingIndicator"
+                style="display: none"
+              >
+                <span
+                  class="badge bg-danger rounded-circle p-1"
+                  style="width: 8px; height: 8px"
+                >
+                </span>
+              </span>
+              <i
+                class="bi bi-hourglass-split text-warning fs-4 mb-1 d-block"
+              ></i>
+              <h5 class="fw-bold m-0" id="bottlesPending">0</h5>
+              <small class="text-muted" style="font-size: 0.7rem"
+                >Pending</small
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4" id="earningsSection">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="text-secondary fw-bold text-uppercase m-0 ps-1">
+            Earnings Summary
+          </h6>
+        </div>
+        <div class="row g-3">
+          <div class="col-12">
+            <div
+              class="glass-card p-3 d-flex align-items-center justify-content-between"
+            >
+              <div>
+                <small class="text-muted d-block">Today's Earnings</small>
+                <h4
+                  class="fw-bold text-dark m-0 font-poppins"
+                  id="earningsToday"
+                >
+                  PKR 0
+                </h4>
+              </div>
+              <div class="text-end">
+                <small
+                  class="text-muted bg-light px-2 py-1 rounded-pill fw-bold"
+                  style="font-size: 0.75rem"
+                  id="earningsChange"
+                  >View Only</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="glass-card p-3 text-center">
+              <i class="bi bi-calendar-week text-primary fs-5 mb-2 d-block"></i>
+              <small class="text-muted d-block" style="font-size: 0.7rem"
+                >This Week</small
+              >
+              <h5 class="fw-bold m-0 mt-1" id="earningsWeek">PKR 0</h5>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="glass-card p-3 text-center">
+              <i
+                class="bi bi-calendar-month text-success fs-5 mb-2 d-block"
+              ></i>
+              <small class="text-muted d-block" style="font-size: 0.7rem"
+                >This Month</small
+              >
+              <h5 class="fw-bold m-0 mt-1" id="earningsMonth">PKR 0</h5>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="deliveriesSection">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="text-secondary fw-bold text-uppercase m-0 ps-1">
+            Today's Deliveries
+          </h6>
+          <button
+            class="btn btn-sm text-primary fw-bold p-0"
+            onclick="DriverApp.filterDeliveries('all')"
+          >
+            View All
+          </button>
+        </div>
+
+        <div id="deliveryList" class="d-flex flex-column gap-3">
+          <div class="glass-card p-3">
+            <div class="placeholder-glow">
+              <span class="placeholder col-7 rounded mb-2"></span>
+              <span class="placeholder col-4 rounded mb-2"></span>
+              <span
+                class="placeholder col-12 rounded"
+                style="height: 40px"
+              ></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal fade" id="qrScanModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-card border-0">
+          <div class="modal-header border-0">
+            <h5 class="modal-title font-poppins">Scan Gate QR</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center pt-0">
+            <div
+              id="reader"
+              style="
+                width: 100%;
+                min-height: 280px;
+                background: #eee;
+                border-radius: 16px;
+                overflow: hidden;
+                position: relative;
+              "
+            ></div>
+            <p class="text-muted mt-3 small">
+              Align QR code within the frame to gain entry.
+            </p>
+            <div id="scanResult" class="mt-2 fw-bold"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="issueModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-bottom">
+        <div class="modal-content glass-card border-0 rounded-top-4">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold">Report Operational Issue</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="issueForm" onsubmit="return false;">
+              <input type="hidden" id="issueDeliveryId" />
+              <div class="mb-3">
+                <label class="form-label small text-muted">Issue Type</label>
+                <div class="d-flex gap-2 flex-wrap">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="issueType"
+                    id="issue1"
+                    autocomplete="off"
+                    value="Delivery Failed"
+                    required
+                  />
+                  <label
+                    class="btn btn-outline-custom btn-sm rounded-pill"
+                    for="issue1"
+                    >Delivery Failed</label
+                  >
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="issueType"
+                    id="issue2"
+                    autocomplete="off"
+                    value="Wrong Address"
+                  />
+                  <label
+                    class="btn btn-outline-custom btn-sm rounded-pill"
+                    for="issue2"
+                    >Wrong Address</label
+                  >
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="issueType"
+                    id="issue3"
+                    autocomplete="off"
+                    value="Vehicle Issue"
+                  />
+                  <label
+                    class="btn btn-outline-custom btn-sm rounded-pill"
+                    for="issue3"
+                    >Vehicle Issue</label
+                  >
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small text-muted">Description</label>
+                <textarea
+                  id="issueDescription"
+                  class="form-control form-control-custom"
+                  rows="3"
+                  placeholder="Describe the operational issue..."
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary-custom w-100"
+                onclick="DriverApp.submitIssue()"
+              >
+                Submit Report
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="mobile-bottom-nav">
+      <a
+        href="#deliveriesSection"
+        class="mobile-nav-item active"
+        data-nav="run"
+        onclick="DriverApp.navigate('run', event)"
+      >
+        <i class="bi bi-truck"></i>
+        <span>Run</span>
+      </a>
+      <a
+        href="#deliveriesSection"
+        class="mobile-nav-item"
+        data-nav="map"
+        onclick="DriverApp.navigate('map', event)"
+      >
+        <i class="bi bi-map"></i>
+        <span>Map</span>
+      </a>
+      <a
+        href="#earningsSection"
+        class="mobile-nav-item"
+        data-nav="earnings"
+        onclick="DriverApp.navigate('earnings', event)"
+      >
+        <i class="bi bi-wallet2"></i>
+        <span>Earnings</span>
+      </a>
+      <a
+        href="#"
+        class="mobile-nav-item"
+        data-nav="profile"
+        onclick="DriverApp.navigate('profile', event)"
+      >
+        <i class="bi bi-person"></i>
+        <span>Profile</span>
+      </a>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../database.js"></script>
+    <script src="./driver.js"></script>
+  </body>
+</html>

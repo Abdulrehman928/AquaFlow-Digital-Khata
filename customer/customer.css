@@ -1,0 +1,503 @@
+/* Body */
+.customer-portal-body {
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    padding-bottom: 80px; /* Space for mobile nav */
+}
+
+/* Header */
+.customer-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-text {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Desktop Navigation */
+.customer-nav {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.customer-nav .nav-link {
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all var(--anim-fast);
+    margin-right: 0.5rem;
+}
+
+.customer-nav .nav-link:hover {
+    background: rgba(0, 119, 182, 0.1);
+    color: var(--primary-color);
+}
+
+.customer-nav .nav-link.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Section Management */
+.customer-section {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.customer-section.active {
+    display: block;
+}
+
+/* Bottle Count Card */
+.bottle-count-card {
+    background: linear-gradient(135deg, rgba(0, 119, 182, 0.08), rgba(72, 202, 228, 0.08));
+    border: 1px solid rgba(0, 119, 182, 0.15);
+}
+
+#bottleCountDisplay {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+/* Action Cards */
+.action-card {
+    cursor: pointer;
+    transition: all var(--anim-med);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.action-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+}
+
+.action-card:active {
+    transform: translateY(-4px);
+}
+
+.action-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: transform var(--anim-fast);
+}
+
+.action-card:hover .action-icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Ledger Table */
+.ledger-table {
+    margin-bottom: 0;
+}
+
+.ledger-table thead {
+    background: rgba(0, 119, 182, 0.05);
+    position: sticky;
+    top: 0;
+}
+
+.ledger-table th {
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+    border: none;
+}
+
+.ledger-table td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ledger-table tbody tr {
+    transition: background-color var(--anim-fast);
+}
+
+.ledger-table tbody tr:hover {
+    background-color: rgba(0, 119, 182, 0.03);
+}
+
+/* Payment Status Badges */
+.badge-paid {
+    background-color: var(--success-color);
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.badge-unpaid {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Star Rating */
+.star-rating {
+    display: flex;
+    gap: 12px;
+    font-size: 2.5rem;
+}
+
+.star-icon {
+    color: #ddd;
+    cursor: pointer;
+    transition: all var(--anim-fast);
+}
+
+.star-icon:hover,
+.star-icon.active {
+    color: #ffc107;
+    transform: scale(1.15);
+}
+
+.star-icon:active {
+    transform: scale(1.05);
+}
+
+/* Feedback Entry */
+.feedback-entry {
+    background: rgba(255, 255, 255, 0.5);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: transform var(--anim-fast);
+}
+
+.feedback-entry:hover {
+    transform: translateX(4px);
+}
+
+.feedback-stars {
+    color: #ffc107;
+    font-size: 1rem;
+}
+
+/* Footer */
+.customer-footer {
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 3rem;
+}
+
+.customer-footer .footer-links a {
+    transition: color var(--anim-fast);
+}
+
+.customer-footer .footer-links a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.75rem 0;
+    z-index: 1000;
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    transition: all var(--anim-fast);
+    flex: 1;
+    text-align: center;
+}
+
+.mobile-nav-item i {
+    font-size: 1.5rem;
+    transition: transform var(--anim-fast);
+}
+
+.mobile-nav-item.active {
+    color: var(--primary-color);
+}
+
+.mobile-nav-item.active i {
+    transform: scale(1.1);
+}
+
+.mobile-nav-item:hover {
+    background: rgba(0, 119, 182, 0.05);
+    color: var(--primary-color);
+}
+
+/* Responsive Table for Mobile */
+@media (max-width: 768px) {
+    .ledger-table {
+        font-size: 0.875rem;
+    }
+    
+    .ledger-table th,
+    .ledger-table td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .ledger-table th:nth-child(2),
+    .ledger-table th:nth-child(3),
+    .ledger-table td:nth-child(2),
+    .ledger-table td:nth-child(3) {
+        display: none; /* Hide Delivered/Returned columns on mobile */
+    }
+    
+    .star-rating {
+        font-size: 2rem;
+        gap: 8px;
+    }
+    
+    .action-icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .customer-portal-body {
+        padding-bottom: 100px; /* Extra space for mobile nav */
+    }
+}
+
+/* Desktop Only */
+@media (min-width: 769px) {
+    .mobile-bottom-nav {
+        display: none;
+    }
+    
+    .customer-portal-body {
+        padding-bottom: 2rem;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading State */
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-muted);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+/* Overhaul Styles */
+:root {
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* Premium Ghost Button */
+.btn-ghost {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--primary-dark);
+    padding: 8px 20px;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+    transition: all var(--anim-fast);
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    color: var(--primary-dark);
+}
+
+/* Premium Action Card (Ghost Variant) */
+.glass-action-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    padding: 1.5rem;
+    height: 100%;
+    transition: all var(--anim-med);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-action-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
+    opacity: 0;
+    transition: opacity var(--anim-fast);
+}
+
+.glass-action-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+}
+
+.glass-action-card:hover::before {
+    opacity: 1;
+}
+
+/* Overview Summary Cards (Hero) */
+.summary-card-feature {
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+    border: 1px solid white;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.summary-card-feature .icon-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    background: rgba(72, 202, 228, 0.15);
+    color: var(--primary-dark);
+    transition: transform var(--anim-med);
+}
+
+.summary-card-feature:hover .icon-box {
+    transform: scale(1.1) rotate(5deg);
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Invoices Modal Styles */
+.modal-glass .modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-glass .modal-header {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 1.5rem 2rem;
+}
+
+.modal-glass .modal-body {
+    padding: 2rem;
+}
+
+.invoice-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.1);
+}
+
+.invoice-detail-row:last-child {
+    border-bottom: none;
+}
+
+/* Status Badge Pill */
+.status-pill {
+    padding: 0.35em 1em;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.status-pill.paid {
+    background-color: rgba(42, 157, 143, 0.15);
+    color: #1a7569;
+}
+
+.status-pill.unpaid {
+    background-color: rgba(231, 111, 81, 0.15);
+    color: #c0392b;
+}
+
+.status-pill.pending {
+    background-color: rgba(233, 196, 106, 0.2);
+    color: #9c6f04;
+}
+
+/* Bottle Gauge Animation */
+.bottle-gauge {
+    position: relative;
+    height: 12px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.bottle-gauge-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-light));
+    border-radius: 10px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottle-gauge-fill.warning {
+    background: linear-gradient(90deg, #f4a261, #e76f51);
+}

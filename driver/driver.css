@@ -1,0 +1,258 @@
+/* Glass Header */
+.glass-header {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    z-index: 1020;
+}
+
+/* Driver Avatar */
+.driver-avatar {
+    position: relative;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+}
+.driver-avatar img {
+    border: 2px solid white;
+    display: block;
+}
+.status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    background: var(--success-color);
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+/* White Glass Button */
+.btn-white-glass {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    color: var(--text-dark);
+    border-radius: 12px;
+    transition: all var(--anim-fast);
+}
+.btn-white-glass:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Progress Blob Background */
+.blob-bg {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--accent-color) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0.6;
+    filter: blur(40px);
+    z-index: 0;
+}
+
+/* Mobile Bottom Nav */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 20px 0; /* Extra padding for iOS home bar */
+    border-top: 1px solid rgba(0,0,0,0.05);
+    z-index: 1030;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 16px;
+    transition: all var(--anim-fast);
+}
+
+.mobile-nav-item i {
+    font-size: 1.4rem;
+    margin-bottom: 2px;
+    transition: transform var(--anim-fast);
+}
+
+.mobile-nav-item.active {
+    color: var(--primary-color);
+    background: rgba(0, 119, 182, 0.08);
+}
+
+.mobile-nav-item.active i {
+    transform: translateY(-2px);
+}
+
+/* Bottom Sheet Modal */
+.modal-dialog-bottom {
+    margin: 0;
+    display: flex;
+    align-items: flex-end;
+    min-height: 100%;
+}
+.modal-dialog-bottom .modal-content {
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: none;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+}
+
+/* Hide Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Utility */
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+.bg-light-blue {
+    background-color: var(--bg-color);
+}
+.bg-gradient-primary {
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+}
+.table-warning-soft { background-color: #fff3cd !important; }
+.table-danger-soft { background-color: #f8d7da !important; }
+
+/* Offline Banner */
+.offline-toast {
+  position: fixed;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--danger-color);
+  color: white;
+  padding: 8px 24px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-md);
+  z-index: 2000;
+  transition: top var(--anim-med);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.offline-toast.show {
+  top: 20px;
+}
+
+/* Delivery Card Enhancements */
+.delivery-card {
+    transition: all var(--anim-med);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+.delivery-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+}
+
+.delivery-card:hover::before {
+    left: 100%;
+}
+
+.delivery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+}
+
+/* Priority Badge */
+.badge.bg-danger-subtle {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Button Icon Animations */
+.btn i {
+    transition: transform var(--anim-fast);
+}
+
+.btn:hover i {
+    transform: scale(1.1);
+}
+
+.btn-primary-custom:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Counter Animation */
+#progressPercentage,
+#bottlesDelivered,
+#bottlesCollected,
+#bottlesPending {
+    font-variant-numeric: tabular-nums;
+    transition: color var(--anim-fast);
+}
+
+/* Status Badge Improvements */
+.badge {
+    font-weight: 600;
+    padding: 0.4em 0.8em;
+    border-radius: 12px;
+    letter-spacing: 0.3px;
+}
+
+/* Mobile Navigation Touch Feedback */
+.mobile-nav-item:active {
+    transform: scale(0.95);
+}
+
+/* Glass Button Hover */
+.btn-white-glass:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* Responsive Delivery Cards */
+@media (max-width: 576px) {
+    .delivery-card {
+        font-size: 0.9rem;
+    }
+    
+    .delivery-card h6 {
+        font-size: 1rem;
+    }
+    
+    .delivery-card .btn-sm {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+}

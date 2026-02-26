@@ -1,0 +1,1750 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Aqua Flow</title>
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap & Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../core/global.css" />
+    <link rel="stylesheet" href="./admin.css" />
+  </head>
+  <body>
+    <!-- NEW: Sticky Glass Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-glass px-4">
+      <div class="container-fluid g-0">
+        <!-- Mobile Toggle -->
+        <button
+          class="btn btn-light d-md-none me-3"
+          aria-label="Toggle Sidebar"
+        >
+          <i class="bi bi-list fs-5"></i>
+        </button>
+
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+          <i class="bi bi-droplet-fill text-primary display-6"></i>
+          <span class="fw-bold text-dark font-poppins"
+            >Aqua Flow
+            <span
+              class="badge bg-primary-subtle text-primary rounded-pill fs-7 ms-2"
+              >Admin</span
+            ></span
+          >
+        </a>
+
+        <!-- Right Side Profile -->
+        <div class="ms-auto d-flex align-items-center gap-3">
+          <!-- FEATURE 10: Last Login Display -->
+          <div class="d-none d-lg-block text-end me-2">
+            <div class="text-muted small fw-bold">LAST LOGIN</div>
+            <div id="lastLoginDisplay" class="small text-primary fw-medium">First session</div>
+          </div>
+
+          <div class="dropdown">
+            <button
+              class="btn btn-link text-dark text-decoration-none dropdown-toggle p-0"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              <div
+                class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 38px; height: 38px; cursor: pointer;"
+              >
+                AD
+              </div>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 py-2">
+              <li><a class="dropdown-item py-2" href="#"><i class="bi bi-person me-2"></i> My Profile</a></li>
+              <li><a class="dropdown-item py-2" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
+              <li><hr class="dropdown-divider my-1"></li>
+              <li><a class="dropdown-item py-2 text-danger" href="../login.html" onclick="DB.clearSession()">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+              </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside
+      class="sidebar glass-card border-0 rounded-0 pt-5 mt-3"
+      aria-label="Main Navigation"
+    >
+      <nav class="mt-4">
+        <span
+          class="text-uppercase text-white-50 small fw-bold px-3 mb-2 d-block tracking-wider"
+          >Menu</span
+        >
+        <ul class="nav flex-column gap-1" role="menubar">
+          <li class="nav-item">
+            <button
+              class="nav-link active w-100 text-start border-0 bg-transparent"
+              data-section="dashboard"
+            >
+              <i class="bi bi-grid-1x2-fill me-3"></i> Dashboard
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link w-100 text-start border-0 bg-transparent"
+              data-section="orders"
+            >
+              <i class="bi bi-cart-fill me-3"></i> Orders
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link w-100 text-start border-0 bg-transparent"
+              data-section="customers"
+            >
+              <i class="bi bi-people-fill me-3"></i> Customers
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link w-100 text-start border-0 bg-transparent"
+              data-section="inventory"
+            >
+              <i class="bi bi-box-seam-fill me-3"></i> Inventory
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link w-100 text-start border-0 bg-transparent"
+              data-section="billing"
+            >
+              <i class="bi bi-receipt-cutoff me-3"></i> Invoices
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link w-100 text-start border-0 bg-transparent"
+              data-section="feedback"
+            >
+              <i class="bi bi-star-fill me-3"></i> Feedback
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link w-100 text-start border-0 bg-transparent"
+              data-section="auditlog"
+            >
+              <i class="bi bi-shield-check me-3"></i> Audit Log
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="mt-auto p-3">
+        <div
+          class="glass-card bg-white-10 p-3 rounded-4 border-0 text-white text-center"
+        >
+          <small class="d-block mb-2 text-white-50">Need Help?</small>
+          <button
+            class="btn btn-sm btn-light w-100 rounded-pill text-primary fw-bold"
+          >
+            Support Center
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content pt-5 text-dark" id="main-content">
+      <div class="load-spacer mt-4"></div>
+
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="admin-section fade-in">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <div>
+            <h2 class="fw-bold mb-1">Dashboard Overview</h2>
+            <p class="text-muted mb-0">
+              Welcome back, here's what's happening today.
+            </p>
+          </div>
+          <div
+            class="date-badge glass-card px-3 py-2 text-primary fw-medium small"
+          >
+            <i class="bi bi-calendar-event me-2"></i>
+            <span id="currentDate">Today</span>
+          </div>
+        </div>
+
+        <!-- KPI Cards - Chhote aur professional -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6 col-xl-3">
+            <div class="glass-card p-3 h-100">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-primary-subtle text-primary rounded-3 p-2" style="width: 40px; height: 40px;">
+                  <i class="bi bi-cart-check fs-5"></i>
+                </div>
+                <div>
+                  <h6 class="text-muted small fw-bold mb-0">Total Orders</h6>
+                  <h3 class="fw-bold mb-0" id="kpiOrders">--</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="glass-card p-3 h-100">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-info-subtle text-info rounded-3 p-2" style="width: 40px; height: 40px;">
+                  <i class="bi bi-people fs-5"></i>
+                </div>
+                <div>
+                  <h6 class="text-muted small fw-bold mb-0">Active Customers</h6>
+                  <h3 class="fw-bold mb-0" id="kpiCustomers">--</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="glass-card p-3 h-100">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-warning-subtle text-warning rounded-3 p-2" style="width: 40px; height: 40px;">
+                  <i class="bi bi-hourglass-split fs-5"></i>
+                </div>
+                <div>
+                  <h6 class="text-muted small fw-bold mb-0">Pending Delivery</h6>
+                  <h3 class="fw-bold mb-0" id="kpiPending">--</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="glass-card p-3 h-100">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-success-subtle text-success rounded-3 p-2" style="width: 40px; height: 40px;">
+                  <i class="bi bi-wallet2 fs-5"></i>
+                </div>
+                <div>
+                  <h6 class="text-muted small fw-bold mb-0">Total Revenue</h6>
+                  <h3 class="fw-bold mb-0" id="kpiRevenue">--</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FEATURE 9: Extra KPI Cards Row -->
+        <div class="row g-4 mb-4">
+          <!-- Low Stock Count -->
+          <div class="col-md-6 col-xl-3">
+            <div class="glass-card p-4 h-100 hover-elevate">
+              <div class="d-flex justify-content-between mb-3">
+                <div class="bg-warning-subtle text-warning rounded-4 p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px">
+                  <i class="bi bi-box-seam fs-4"></i>
+                </div>
+              </div>
+              <h6 class="text-muted text-uppercase small fw-bold">Low Stock Items</h6>
+              <h2 class="fw-bold mb-0" id="kpiLowStock">--</h2>
+            </div>
+          </div>
+          <!-- Customer Balance -->
+          <div class="col-md-6 col-xl-3">
+            <div class="glass-card p-4 h-100 hover-elevate">
+              <div class="d-flex justify-content-between mb-3">
+                <div class="bg-danger-subtle text-danger rounded-4 p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px">
+                  <i class="bi bi-cash-stack fs-4"></i>
+                </div>
+              </div>
+              <h6 class="text-muted text-uppercase small fw-bold">Total Balance</h6>
+              <h2 class="fw-bold mb-0" id="kpiBalance">--</h2>
+            </div>
+          </div>
+          <!-- Average Order Value -->
+          <div class="col-md-6 col-xl-3">
+            <div class="glass-card p-4 h-100 hover-elevate">
+              <div class="d-flex justify-content-between mb-3">
+                <div class="bg-primary-subtle text-primary rounded-4 p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px">
+                  <i class="bi bi-calculator fs-4"></i>
+                </div>
+              </div>
+              <h6 class="text-muted text-uppercase small fw-bold">Avg Order Value</h6>
+              <h2 class="fw-bold mb-0" id="kpiAvgOrder">--</h2>
+            </div>
+          </div>
+          <!-- Average Rating -->
+          <div class="col-md-6 col-xl-3">
+            <div class="glass-card p-4 h-100 hover-elevate">
+              <div class="d-flex justify-content-between mb-3">
+                <div class="bg-info-subtle text-info rounded-4 p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px">
+                  <i class="bi bi-star fs-4"></i>
+                </div>
+              </div>
+              <h6 class="text-muted text-uppercase small fw-bold">Avg Rating</h6>
+              <h2 class="fw-bold mb-0" id="kpiRating">--</h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Table -->
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="glass-card p-4 h-100">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold mb-0">Recent Activity</h5>
+                <button class="btn btn-sm btn-link text-decoration-none" onclick="switchSection('orders')">View All</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th class="ps-3 border-0 rounded-start-2">Order ID</th>
+                      <th class="border-0">Customer</th>
+                      <th class="border-0">Items</th>
+                      <th class="border-0">Status</th>
+                      <th class="text-end pe-3 border-0 rounded-end-2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardTableBody" class="border-top-0">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+          <!-- NEW: Business Health Alerts -->
+          <div class="col-lg-4">
+            <div class="glass-card p-4 border-danger border-top border-4 mb-4">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-exclamation-triangle-fill text-danger fs-4"></i>
+                <h5 class="fw-bold mb-0">Health Alerts</h5>
+              </div>
+              <p class="small text-muted mb-3">Customers with high balances or inactivity.</p>
+              <div class="table-responsive">
+                <table class="table table-sm align-middle">
+                  <tbody id="healthAlertsList">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- FEATURE 3: Low Stock Alerts -->
+            <div class="glass-card p-4 border-warning border-top border-4">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-box-fill text-warning fs-4"></i>
+                <h5 class="fw-bold mb-0">Low Stock Alerts</h5>
+              </div>
+              <p class="small text-muted mb-3">Items with stock level 10 or less.</p>
+              <div class="table-responsive">
+                <table class="table table-sm align-middle">
+                  <tbody id="lowStockList">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        <!-- FEATURE 4: Sales Chart Row -->
+        <div class="row g-4 mt-2">
+          <div class="col-lg-8">
+            <div class="glass-card p-4">
+              <div class="d-flex align-items-center gap-2 mb-4">
+                <i class="bi bi-bar-chart-fill text-primary fs-4"></i>
+                <h5 class="fw-bold mb-0">Sales Distribution</h5>
+              </div>
+              <div id="salesChartContainer">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Orders Section -->
+      <section id="orders" class="admin-section d-none">
+        <h2 class="fw-bold mb-4">Order Management</h2>
+        <div class="glass-card p-4">
+          <div class="row g-3 mb-4">
+            <div class="col-md-5">
+              <div class="position-relative">
+                <i
+                  class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"
+                ></i>
+                <input
+                  type="text"
+                  id="searchOrders"
+                  class="form-control form-control-custom ps-5"
+                  placeholder="Search orders..."
+                  onkeyup="searchOrders()"
+                />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <select id="statusFilter" class="form-select form-control-custom" onchange="searchOrders()">
+                <option value="all">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="col-md-4 text-md-end">
+              <button class="btn btn-outline-success" onclick="exportOrders()">
+                <i class="bi bi-download me-2"></i> Export CSV
+              </button>
+              <button class="btn btn-outline-custom ms-2">
+                <i class="bi bi-funnel me-2"></i> Filter
+              </button>
+              <button id="btnNewOrder" class="btn btn-primary-custom ms-2">
+                <i class="bi bi-plus-lg me-2"></i> New Order
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+            <div id="pagination" class="text-center mt-3"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Use similar structure for other sections -->
+
+      <!-- Inventory Section - COMPLETELY FIXED -->
+      <section id="inventory" class="admin-section d-none">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h2 class="fw-bold mb-1">Inventory Management</h2>
+            <p class="text-muted small mb-0">Track stock levels and manage products</p>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary" onclick="exportInventory()">
+              <i class="bi bi-download me-1"></i> Export
+            </button>
+            <button class="btn btn-primary" onclick="showAddItemForm()">
+              <i class="bi bi-plus-lg me-1"></i> Add Item
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottle Tracker Cards - FIXED with proper data -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <div class="glass-card p-3 border-0 border-start border-4 border-primary">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-primary-subtle text-primary rounded-3 p-2">
+                  <i class="bi bi-droplet fs-4"></i>
+                </div>
+                <div>
+                  <span class="text-muted small text-uppercase fw-bold">SYSTEM TOTAL</span>
+                  <h3 class="fw-bold mb-0" id="totalSystemBottles">500</h3>
+                  <small class="text-muted">Total bottles owned</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="glass-card p-3 border-0 border-start border-4 border-success">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-success-subtle text-success rounded-3 p-2">
+                  <i class="bi bi-building fs-4"></i>
+                </div>
+                <div>
+                  <span class="text-muted small text-uppercase fw-bold">WAREHOUSE</span>
+                  <h3 class="fw-bold mb-0" id="warehouseStock">150</h3>
+                  <small class="text-muted">In stock</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="glass-card p-3 border-0 border-start border-4 border-info">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-info-subtle text-info rounded-3 p-2">
+                  <i class="bi bi-people fs-4"></i>
+                </div>
+                <div>
+                  <span class="text-muted small text-uppercase fw-bold">WITH CUSTOMERS</span>
+                  <h3 class="fw-bold mb-0" id="customerStock">320</h3>
+                  <small class="text-muted">Currently out</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="glass-card p-3 border-0 border-start border-4 border-warning">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-warning-subtle text-warning rounded-3 p-2">
+                  <i class="bi bi-exclamation-triangle fs-4"></i>
+                </div>
+                <div>
+                  <span class="text-muted small text-uppercase fw-bold">IN TRANSIT</span>
+                  <h3 class="fw-bold mb-0" id="inTransitStock">25</h3>
+                  <small class="text-muted">Being delivered</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Missing Bottles Alert (if any) -->
+        <div class="row mb-4" id="missingBottlesAlert" style="display: none;">
+          <div class="col-12">
+            <div class="alert alert-danger d-flex align-items-center">
+              <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+              <div>
+                <strong>Missing Bottles Detected!</strong> 
+                <span id="missingBottlesCount">5</span> bottles are unaccounted for. 
+                Please conduct an audit.
+              </div>
+              <button class="btn btn-sm btn-danger ms-auto" onclick="startAudit()">
+                Start Audit
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="glass-card p-3 mb-4">
+          <div class="row g-2 align-items-center">
+            <div class="col-md-5">
+              <div class="position-relative">
+                <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                <input type="text" id="searchInventory" class="form-control ps-5" 
+                       placeholder="Search by item name or category..." onkeyup="searchInventory()">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <select id="categoryFilter" class="form-select" onchange="filterInventory()">
+                <option value="all">All Categories</option>
+                <option value="Bottles">Bottles</option>
+                <option value="Equipment">Equipment</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Parts">Parts</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="stockFilter" class="form-select" onchange="filterInventory()">
+                <option value="all">All Stock</option>
+                <option value="low">Low Stock Only</option>
+                <option value="normal">Normal Stock</option>
+              </select>
+            </div>
+            <div class="col-md-2 text-end">
+              <button class="btn btn-outline-secondary" onclick="refreshInventory()" title="Refresh">
+                <i class="bi bi-arrow-repeat"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory Table -->
+        <div class="glass-card p-0 overflow-hidden">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th class="ps-4" style="width: 8%">ID</th>
+                  <th style="width: 25%">Product Name</th>
+                  <th style="width: 15%">Category</th>
+                  <th style="width: 20%">Stock Level</th>
+                  <th style="width: 12%">Status</th>
+                  <th style="width: 20%" class="text-end pe-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryTableBody"></tbody>
+            </table>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="d-flex justify-content-between align-items-center p-3 border-top">
+            <div class="small text-muted">
+              Showing <span id="invStartCount">1</span> to <span id="invEndCount">5</span> 
+              of <span id="invTotalCount">6</span> items
+            </div>
+            <div class="pagination-btns" id="inventoryPagination">
+              <!-- JS se populate hoga -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Low Stock Summary (Optional) -->
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="glass-card p-3">
+              <h6 class="fw-bold mb-3"><i class="bi bi-exclamation-circle text-warning me-2"></i>Low Stock Items</h6>
+              <div id="lowStockSummary" class="small">
+                Loading...
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="glass-card p-3">
+              <h6 class="fw-bold mb-3"><i class="bi bi-arrow-repeat text-info me-2"></i>Recent Restocks</h6>
+              <div id="recentRestocks" class="small">
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- Invoices & Billing Section - COMPLETELY FIXED -->
+<section id="billing" class="admin-section d-none">
+  <!-- Header with Summary -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">Invoices & Billing</h2>
+      <p class="text-muted small mb-0">Manage customer invoices and track payments</p>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-success" onclick="exportInvoices()">
+        <i class="bi bi-download me-1"></i> Export
+      </button>
+      <button class="btn btn-primary" onclick="createNewInvoice()">
+        <i class="bi bi-plus-lg me-1"></i> New Invoice
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-primary-subtle text-primary rounded-3 p-2">
+            <i class="bi bi-receipt fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Total Invoices</span>
+            <h3 class="fw-bold mb-0" id="totalInvoices">6</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-success-subtle text-success rounded-3 p-2">
+            <i class="bi bi-check-circle fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Paid</span>
+            <h3 class="fw-bold mb-0" id="paidInvoices">3</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-warning-subtle text-warning rounded-3 p-2">
+            <i class="bi bi-clock fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Unpaid</span>
+            <h3 class="fw-bold mb-0" id="unpaidInvoices">3</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-info-subtle text-info rounded-3 p-2">
+            <i class="bi bi-cash-stack fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Total Amount</span>
+            <h3 class="fw-bold mb-0" id="totalAmount">PKR 8,228</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Row: Invoices Table + Cash Match -->
+  <div class="row g-4">
+    <!-- Left Column: Invoices Table (8 columns) -->
+    <div class="col-lg-8">
+      <div class="glass-card p-0 overflow-hidden">
+        <!-- Table Header with Filters -->
+        <div class="p-3 border-bottom">
+          <div class="row g-2 align-items-center">
+            <div class="col-md-5">
+              <div class="position-relative">
+                <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                <input type="text" id="searchInvoices" class="form-control ps-5" 
+                       placeholder="Search by invoice # or customer..." onkeyup="searchInvoices()">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <select id="invoiceStatusFilter" class="form-select" onchange="filterInvoices()">
+                <option value="all">All Status</option>
+                <option value="Paid">Paid</option>
+                <option value="Unpaid">Unpaid</option>
+              </select>
+            </div>
+            <div class="col-md-4 text-end">
+              <span class="text-muted small me-2">
+                <i class="bi bi-info-circle"></i> Click invoice to view details
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoices Table -->
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th class="ps-4">Invoice #</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th class="text-end">Amount</th>
+                <th class="text-end pe-4">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="billingTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center p-3 border-top">
+          <div class="small text-muted">
+            Showing <span id="invStartCount">1</span> to <span id="invEndCount">5</span> 
+            of <span id="invTotalCount">6</span> invoices
+          </div>
+          <div class="pagination-btns" id="invoicePagination">
+            <!-- JS se populate hoga -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Cash Match (4 columns) -->
+    <div class="col-lg-4">
+      <!-- Daily Cash Match Card -->
+      <div class="glass-card p-0 overflow-hidden mb-4">
+        <div class="p-3 bg-primary text-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0 fw-bold"><i class="bi bi-cash-coin me-2"></i>Daily Cash Match</h5>
+          <span class="badge bg-light text-primary" id="cashMatchStatus">Today</span>
+        </div>
+        
+        <div class="p-3">
+          <!-- Summary Stats -->
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <div class="bg-light rounded p-2 text-center">
+                <div class="small text-muted">Total System</div>
+                <div class="fw-bold" id="totalSystemCash">PKR 31,700</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="bg-light rounded p-2 text-center">
+                <div class="small text-muted">Total Driver</div>
+                <div class="fw-bold" id="totalDriverCash">PKR 31,650</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cash Match Table -->
+          <div class="table-responsive" style="max-height: 300px;">
+            <table class="table table-sm align-middle small">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Driver</th>
+                  <th class="text-end">System</th>
+                  <th class="text-end">Actual</th>
+                  <th class="text-end">Diff</th>
+                </tr>
+              </thead>
+              <tbody id="cashMatchList">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Legend -->
+          <div class="mt-3 p-2 bg-light rounded small">
+            <div class="d-flex gap-3">
+              <span><span class="badge bg-success">&nbsp;</span> Matched</span>
+              <span><span class="badge bg-warning">&nbsp;</span> Short/Excess</span>
+              <span><span class="badge bg-danger">&nbsp;</span> Discrepancy</span>
+            </div>
+          </div>
+
+          <!-- Verify Button -->
+          <button class="btn btn-primary w-100 mt-3" onclick="verifyCashMatch()">
+            <i class="bi bi-check2-circle me-2"></i> Verify Today's Cash
+          </button>
+        </div>
+      </div>
+
+      <!-- Recent Payments Card -->
+      <div class="glass-card p-3">
+        <h6 class="fw-bold mb-3"><i class="bi bi-clock-history me-2"></i>Recent Payments</h6>
+        <div id="recentPaymentsList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Details Modal (hidden by default) -->
+  <div class="modal fade" id="invoiceDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title"><i class="bi bi-file-text me-2"></i>Invoice Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-4">
+            <div class="col-6">
+              <h6 class="text-muted small">Invoice #</h6>
+              <h5 class="fw-bold" id="detailInvoiceNo">INV-2026-001</h5>
+            </div>
+            <div class="col-6 text-end">
+              <h6 class="text-muted small">Status</h6>
+              <span class="badge bg-success fs-6" id="detailStatus">Paid</span>
+            </div>
+          </div>
+          
+          <div class="row mb-4">
+            <div class="col-6">
+              <h6 class="text-muted small">Customer</h6>
+              <h5 id="detailCustomer">Cafe One</h5>
+              <p class="small text-muted mb-0" id="detailCustomerPhone">0300-1234567</p>
+            </div>
+            <div class="col-6">
+              <h6 class="text-muted small">Dates</h6>
+              <p class="mb-0"><strong>Issued:</strong> <span id="detailDate">2026-02-20</span></p>
+              <p class="mb-0"><strong>Due:</strong> <span id="detailDueDate">2026-03-05</span></p>
+            </div>
+          </div>
+          
+          <h6 class="fw-bold mb-3">Invoice Items</h6>
+          <div class="table-responsive mb-4">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th class="text-center">Qty</th>
+                  <th class="text-end">Price</th>
+                  <th class="text-end">Total</th>
+                </tr>
+              </thead>
+              <tbody id="detailItems">
+                <!-- Populated by JS -->
+              </tbody>
+              <tfoot class="table-light">
+                <tr>
+                  <td colspan="3" class="text-end fw-bold">Subtotal:</td>
+                  <td class="text-end" id="detailSubtotal">PKR 0</td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-end fw-bold">Tax (5%):</td>
+                  <td class="text-end" id="detailTax">PKR 0</td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-end fw-bold">Delivery:</td>
+                  <td class="text-end" id="detailDelivery">PKR 0</td>
+                </tr>
+                <tr class="fw-bold">
+                  <td colspan="3" class="text-end">Grand Total:</td>
+                  <td class="text-end text-primary" id="detailTotal">PKR 0</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          
+          <div class="row">
+            <div class="col-6">
+              <h6 class="text-muted small">Payment Method</h6>
+              <p id="detailPaymentMethod">Cash</p>
+            </div>
+            <div class="col-6 text-end">
+              <h6 class="text-muted small">Paid Date</h6>
+              <p id="detailPaidDate">2026-02-20</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline-primary" onclick="printCurrentInvoice()">
+            <i class="bi bi-printer me-2"></i> Print
+          </button>
+          <button type="button" class="btn btn-success" id="markPaidModalBtn" onclick="markCurrentAsPaid()">
+            <i class="bi bi-check-circle me-2"></i> Mark as Paid
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- Customers Section -->
+      <section id="customers" class="admin-section d-none">
+        <!-- Header with Add Button -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h2 class="fw-bold mb-1">Customer Directory</h2>
+            <p class="text-muted small mb-0">Manage all your customers here</p>
+          </div>
+          <button class="btn btn-primary" onclick="toggleCustomerForm()">
+            <i class="bi bi-person-plus-fill me-2"></i> Add New Customer
+          </button>
+        </div>
+
+        <!-- Add Customer Form (Hidden by Default) -->
+        <div id="addCustomerForm" class="glass-card p-4 mb-4" style="display: none;">
+          <h5 class="fw-bold mb-3"><i class="bi bi-person-plus me-2 text-primary"></i>New Customer Details</h5>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-muted">Full Name <span class="text-danger">*</span></label>
+              <input type="text" id="newCustName" class="form-control" placeholder="e.g. Ali Khan">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-muted">Phone <span class="text-danger">*</span></label>
+              <input type="text" id="newCustPhone" class="form-control" placeholder="e.g. 0300-1234567">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-muted">Area</label>
+              <select id="newCustArea" class="form-select">
+                <option value="Gulshan">Gulshan</option>
+                <option value="DHA">DHA</option>
+                <option value="Clifton">Clifton</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-3 d-flex gap-2">
+            <button class="btn btn-primary px-4" onclick="addCustomer()">
+              <i class="bi bi-check-lg me-1"></i> Save Customer
+            </button>
+            <button class="btn btn-light text-muted" onclick="toggleCustomerForm()">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="glass-card p-3 mb-4">
+          <div class="row g-2 align-items-center">
+            <div class="col-md-4">
+              <div class="position-relative">
+                <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                <input type="text" id="searchCustomers" class="form-control ps-5" 
+                       placeholder="Search by name or phone..." onkeyup="searchCustomers()">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <select id="statusFilter" class="form-select" onchange="filterCustomers()">
+                <option value="all">All Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select id="areaFilter" class="form-select" onchange="filterCustomers()">
+                <option value="all">All Areas</option>
+                <option value="Gulshan">Gulshan</option>
+                <option value="DHA">DHA</option>
+                <option value="Clifton">Clifton</option>
+              </select>
+            </div>
+            <div class="col-md-3 text-end">
+              <button class="btn btn-outline-success btn-sm" onclick="exportCustomers()">
+                <i class="bi bi-download me-1"></i> Export CSV
+              </button>
+              <button class="btn btn-outline-secondary btn-sm ms-1" onclick="refreshCustomers()">
+                <i class="bi bi-arrow-repeat"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customers Table -->
+        <div class="glass-card p-0 overflow-hidden">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th class="ps-4" style="width: 5%">#</th>
+                  <th style="width: 25%">Customer Details</th>
+                  <th style="width: 15%">Membership</th>
+                  <th style="width: 15%">Balance</th>
+                  <th style="width: 15%">Last Order</th>
+                  <th style="width: 25%" class="text-end pe-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="customersTableBody"></tbody>
+            </table>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="d-flex justify-content-between align-items-center p-3 border-top">
+            <div class="small text-muted">
+              Showing <span id="startCount">1</span> to <span id="endCount">5</span> of <span id="totalCount">6</span> customers
+            </div>
+            <div class="pagination-btns" id="customerPagination">
+              <!-- JS se populate hoga -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- Feedback Section - COMPLETELY FIXED -->
+<section id="feedback" class="admin-section d-none">
+  <!-- Header with Actions -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">Customer Feedback Inbox</h2>
+      <p class="text-muted small mb-0">Manage and respond to customer reviews</p>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-success" onclick="exportFeedback()">
+        <i class="bi bi-download me-1"></i> Export CSV
+      </button>
+      <button class="btn btn-outline-primary" onclick="refreshFeedback()">
+        <i class="bi bi-arrow-repeat me-1"></i> Refresh
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-primary-subtle text-primary rounded-3 p-2">
+            <i class="bi bi-chat-dots fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Total Feedback</span>
+            <h3 class="fw-bold mb-0" id="totalFeedbackCount">7</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-success-subtle text-success rounded-3 p-2">
+            <i class="bi bi-star-fill fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Average Rating</span>
+            <h3 class="fw-bold mb-0" id="avgRatingDisplay">4.0</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-warning-subtle text-warning rounded-3 p-2">
+            <i class="bi bi-envelope fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Unreplied</span>
+            <h3 class="fw-bold mb-0" id="unrepliedCount">3</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-info-subtle text-info rounded-3 p-2">
+            <i class="bi bi-calendar-week fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">This Week</span>
+            <h3 class="fw-bold mb-0" id="weeklyCount">4</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Row -->
+  <div class="row g-4">
+    <!-- Left Column: Feedback Table (8 columns) -->
+    <div class="col-lg-8">
+      <div class="glass-card p-0 overflow-hidden">
+        <!-- Search and Filter -->
+        <div class="p-3 border-bottom">
+          <div class="row g-2">
+            <div class="col-md-5">
+              <div class="position-relative">
+                <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                <input type="text" id="searchFeedback" class="form-control ps-5" 
+                       placeholder="Search by customer or message..." onkeyup="searchFeedback()">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <select id="ratingFilter" class="form-select" onchange="filterFeedback()">
+                <option value="all">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="statusFilter" class="form-select" onchange="filterFeedback()">
+                <option value="all">All Status</option>
+                <option value="New">New</option>
+                <option value="Replied">Replied</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="dateFilter" class="form-select" onchange="filterFeedback()">
+                <option value="all">All Time</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feedback Table -->
+        <div class="table-responsive" style="max-height: 500px;">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light sticky-top">
+              <tr>
+                <th class="ps-4" style="width: 10%">Date</th>
+                <th style="width: 15%">Customer</th>
+                <th style="width: 35%">Message</th>
+                <th style="width: 10%">Rating</th>
+                <th style="width: 10%">Status</th>
+                <th style="width: 20%" class="text-end pe-4">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="feedbackInboxBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center p-3 border-top">
+          <div class="small text-muted">
+            Showing <span id="fbStartCount">1</span> to <span id="fbEndCount">5</span> 
+            of <span id="fbTotalCount">7</span> feedback
+          </div>
+          <div class="pagination-btns" id="feedbackPagination">
+            <!-- JS se populate hoga -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Rating Analytics (4 columns) -->
+    <div class="col-lg-4">
+      <!-- Rating Distribution Card -->
+      <div class="glass-card p-4 mb-4">
+        <h5 class="fw-bold mb-4"><i class="bi bi-pie-chart me-2"></i>Rating Distribution</h5>
+        
+        <!-- Stars Display -->
+        <div class="text-center mb-4">
+          <div class="display-1 fw-bold text-warning" id="bigAvgRating">4.0</div>
+          <div class="text-warning fs-3" id="avgStarsDisplay">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-half"></i>
+          </div>
+          <div class="text-muted small">Average of <span id="totalReviews">7</span> reviews</div>
+        </div>
+
+        <!-- Rating Bars -->
+        <div class="rating-bars">
+          <div class="rating-bar-item mb-2">
+            <div class="d-flex justify-content-between small mb-1">
+              <span>5 Stars</span>
+              <span class="fw-bold" id="star5Count">3</span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-success" id="star5Bar" style="width: 43%"></div>
+            </div>
+          </div>
+          
+          <div class="rating-bar-item mb-2">
+            <div class="d-flex justify-content-between small mb-1">
+              <span>4 Stars</span>
+              <span class="fw-bold" id="star4Count">2</span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-info" id="star4Bar" style="width: 29%"></div>
+            </div>
+          </div>
+          
+          <div class="rating-bar-item mb-2">
+            <div class="d-flex justify-content-between small mb-1">
+              <span>3 Stars</span>
+              <span class="fw-bold" id="star3Count">1</span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-warning" id="star3Bar" style="width: 14%"></div>
+            </div>
+          </div>
+          
+          <div class="rating-bar-item mb-2">
+            <div class="d-flex justify-content-between small mb-1">
+              <span>2 Stars</span>
+              <span class="fw-bold" id="star2Count">1</span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-danger" id="star2Bar" style="width: 14%"></div>
+            </div>
+          </div>
+          
+          <div class="rating-bar-item mb-2">
+            <div class="d-flex justify-content-between small mb-1">
+              <span>1 Star</span>
+              <span class="fw-bold" id="star1Count">0</span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-danger" id="star1Bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Replies Card -->
+      <div class="glass-card p-3">
+        <h6 class="fw-bold mb-3"><i class="bi bi-clock-history me-2"></i>Recent Replies</h6>
+        <div id="recentRepliesList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Feedback Modal -->
+  <div class="modal fade" id="viewFeedbackModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-info text-white">
+          <h5 class="modal-title"><i class="bi bi-chat-text me-2"></i>Feedback Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <strong>Customer:</strong> <span id="viewCustomerName"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Rating:</strong> <span id="viewRating" class="text-warning"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Date:</strong> <span id="viewDate"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Message:</strong>
+            <p class="p-3 bg-light rounded" id="viewMessage"></p>
+          </div>
+          <div class="mb-3" id="viewReplySection" style="display: none;">
+            <strong>Your Reply:</strong>
+            <p class="p-3 bg-success bg-opacity-10 rounded" id="viewReply"></p>
+            <small class="text-muted" id="viewRepliedAt"></small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="viewReplyBtn" onclick="openReplyFromView()">
+            <i class="bi bi-reply me-2"></i>Reply
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Audit Log Section -->
+<section id="auditlog" class="admin-section d-none">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">Audit Log</h2>
+      <p class="text-muted small mb-0">Every critical admin action is recorded here automatically</p>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-success" onclick="exportAuditLog()">
+        <i class="bi bi-download me-1"></i> Export CSV
+      </button>
+      <button class="btn btn-outline-danger" onclick="clearAuditLog()" 
+              onclick="return confirm('Are you sure?')">
+        <i class="bi bi-trash me-1"></i> Clear Log
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-primary-subtle text-primary rounded-3 p-2">
+            <i class="bi bi-journal-text fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Total Events</span>
+            <h3 class="fw-bold mb-0" id="auditTotal">10</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-success-subtle text-success rounded-3 p-2">
+            <i class="bi bi-calendar-day fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Today</span>
+            <h3 class="fw-bold mb-0" id="auditToday">8</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-warning-subtle text-warning rounded-3 p-2">
+            <i class="bi bi-pencil-square fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Updates</span>
+            <h3 class="fw-bold mb-0" id="auditUpdates">4</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="glass-card p-3 border border-info">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-info-subtle text-info rounded-3 p-2">
+            <i class="bi bi-shield-check fs-4"></i>
+          </div>
+          <div>
+            <span class="text-muted small text-uppercase fw-bold">Tamper Proof</span>
+            <h3 class="fw-bold mb-0" id="auditStatus">✅ Active</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Filter -->
+  <div class="glass-card p-3 mb-4">
+    <div class="row g-2">
+      <div class="col-md-4">
+        <div class="position-relative">
+          <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+          <input type="text" id="searchAudit" class="form-control ps-5" 
+                 placeholder="Search actions, entities, details..." onkeyup="searchAudit()">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <select id="actionFilter" class="form-select" onchange="filterAudit()">
+          <option value="all">All Actions</option>
+          <option value="LOGIN">Login/Logout</option>
+          <option value="CREATE">Create</option>
+          <option value="UPDATE">Update</option>
+          <option value="DELETE">Delete</option>
+          <option value="PAYMENT">Payment</option>
+          <option value="EXPORT">Export</option>
+          <option value="VERIFY">Verify</option>
+          <option value="REPLY">Reply</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select id="entityFilter" class="form-select" onchange="filterAudit()">
+          <option value="all">All Entities</option>
+          <option value="User">User</option>
+          <option value="Order">Order</option>
+          <option value="Customer">Customer</option>
+          <option value="Feedback">Feedback</option>
+          <option value="Invoice">Invoice</option>
+          <option value="Inventory">Inventory</option>
+          <option value="Cash Match">Cash Match</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select id="dateRange" class="form-select" onchange="filterAudit()">
+          <option value="all">All Time</option>
+          <option value="today">Today</option>
+          <option value="week">This Week</option>
+          <option value="month">This Month</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-outline-secondary w-100" onclick="refreshAudit()">
+          <i class="bi bi-arrow-repeat me-1"></i> Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audit Log Table -->
+  <div class="glass-card p-0 overflow-hidden">
+    <div class="table-responsive" style="max-height: 500px;">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light sticky-top">
+          <tr>
+            <th class="ps-4" style="width: 15%">Timestamp</th>
+            <th style="width: 10%">Action</th>
+            <th style="width: 10%">Entity</th>
+            <th style="width: 10%">ID</th>
+            <th style="width: 40%">Details</th>
+            <th style="width: 15%" class="text-end pe-4">User</th>
+          </tr>
+        </thead>
+        <tbody id="auditLogBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between align-items-center p-3 border-top">
+      <div class="small text-muted">
+        Showing <span id="auditStart">1</span> to <span id="auditEnd">5</span> 
+        of <span id="auditTotalCount">10</span> events
+      </div>
+      <div class="pagination-btns" id="auditPagination">
+        <!-- JS se populate hoga -->
+      </div>
+    </div>
+  </div>
+</section>
+    </main>
+
+    <!-- New Order Modal -->
+    <div class="modal fade" id="newOrderModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-card border-0">
+          <div class="modal-header border-0">
+            <h5 class="modal-title fw-bold">Create New Order</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="newOrderForm">
+              <div class="mb-3">
+                <label class="form-label small text-muted fw-bold"
+                  >Customer</label
+                >
+                <select
+                  class="form-select form-control-custom"
+                  id="newOrderCustomer"
+                  required
+                >
+                  <option value="" selected disabled>Select Customer...</option>
+                  <!-- Populated by JS -->
+                </select>
+              </div>
+              <div class="row g-3">
+                <div class="col-6">
+                  <label class="form-label small text-muted fw-bold"
+                    >Bottles</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control form-control-custom"
+                    id="newOrderQty"
+                    min="1"
+                    value="1"
+                    required
+                  />
+                </div>
+                <div class="col-6">
+                  <label class="form-label small text-muted fw-bold"
+                    >Delivery Date</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control form-control-custom"
+                    id="newOrderDate"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mt-3">
+                <label class="form-label small text-muted fw-bold"
+                  >Notes (Optional)</label
+                >
+                <textarea
+                  class="form-control form-control-custom"
+                  id="newOrderNotes"
+                  rows="2"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-light text-muted"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary-custom px-4"
+              id="btnSubmitNewOrder"
+            >
+              Create Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monthly Bill Modal (Auto-Generation) -->
+    <div class="modal fade" id="monthlyBillModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content glass-card border-0">
+          <div class="modal-header border-0 bg-primary text-white p-4">
+            <h5 class="modal-title fw-bold"><i class="bi bi-file-earmark-text me-2"></i>Monthly Invoice</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="d-flex justify-content-between mb-4 border-bottom pb-3">
+                <div>
+                    <h6 class="text-uppercase small text-muted fw-bold">Customer</h6>
+                    <h4 id="billCustName" class="fw-bold text-primary">--</h4>
+                </div>
+                <div class="text-end">
+                    <h6 class="text-uppercase small text-muted fw-bold">Statement Month</h6>
+                    <h4 class="fw-bold" id="billStatementMonth">Current Month</h4>
+                </div>
+            </div>
+            
+            <div class="table-responsive mb-4">
+                <table class="table table-sm align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="billOrderLines">
+                        <!-- Populated by JS -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-primary fw-bold">
+                            <td colspan="3" class="text-end">Total Amount Due:</td>
+                            <td id="billTotalAmount">PKR 0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="bg-light p-3 rounded text-center small text-muted">
+                This is a system generated invoice. No signature required.
+            </div>
+          </div>
+          <div class="modal-footer border-0 p-4 pt-0">
+            <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary-custom px-4" onclick="printInvoice()"><i class="bi bi-printer me-2"></i>Print Bill</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURE 5: Edit Customer Modal -->
+    <div class="modal fade" id="editCustomerModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-card border-0">
+          <div class="modal-header border-0">
+            <h5 class="modal-title fw-bold">Edit Customer</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editCustomerForm">
+              <input type="hidden" id="editCustId">
+              <div class="mb-3">
+                <label class="form-label small text-muted fw-bold">Full Name</label>
+                <input type="text" class="form-control form-control-custom" id="editCustName" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small text-muted fw-bold">Phone Number</label>
+                <input type="text" class="form-control form-control-custom" id="editCustPhone" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small text-muted fw-bold">Area</label>
+                <input type="text" class="form-control form-control-custom" id="editCustArea">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="button" class="btn btn-light text-muted" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary-custom px-4" onclick="saveCustomerEdit()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURE 6: Loading Spinner Modal Overlay -->
+    <div id="loadingSpinner">
+      <div class="d-flex flex-column align-items-center">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-text mt-3">Refreshing Data...</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../database.js"></script>
+    <!-- Modules: load in dependency order -->
+    <script src="./modules/config.js"></script>
+    <script src="./modules/validator.js"></script>
+    <script src="./modules/audit.js"></script>
+    <script src="./modules/alerts.js"></script>
+    <script src="./modules/analytics.js"></script>
+    <script src="./modules/customers.js"></script>
+    <script src="./modules/orders.js"></script>
+    <script src="./modules/billing.js"></script>
+    <script src="./modules/inventory.js"></script>
+    <!-- Orchestrator: loads last -->
+    <script src="./admin.js"></script>
+  </body>
+</html>
+    <!-- Reply to Feedback Modal -->
+    <div class="modal fade" id="replyFeedbackModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Reply to Feedback</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 p-3 bg-light rounded">
+                        <p><strong>Customer:</strong> <span id="replyCustomerName"></span></p>
+                        <p><strong>Rating:</strong> <span id="replyCustomerRating"></span></p>
+                        <p><strong>Message:</strong> <span id="replyCustomerMessage"></span></p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Your Reply:</label>
+                        <textarea id="replyText" class="form-control" rows="4" placeholder="Type your reply here..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveFeedbackReply()">Send Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../database.js"></script>
+    <script src="./admin.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", initAdmin);
+    </script>
+    <!-- Edit Customer Modal -->
+    <div class="modal fade" id="editCustomerModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Edit Customer</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="editCustId">
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Full Name</label>
+              <input type="text" class="form-control" id="editCustName" placeholder="Enter name">
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Phone Number</label>
+              <input type="text" class="form-control" id="editCustPhone" placeholder="0300-1234567">
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Area</label>
+                <select class="form-select" id="editCustArea">
+                  <option value="Gulshan">Gulshan</option>
+                  <option value="DHA">DHA</option>
+                  <option value="Clifton">Clifton</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Status</label>
+                <select class="form-select" id="editCustStatus">
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Email (Optional)</label>
+              <input type="email" class="form-control" id="editCustEmail" placeholder="email@example.com">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="saveCustomerEdit()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

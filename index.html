@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aqua Flow - Smart Water Management</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="core/global.css" />
+    <link rel="stylesheet" href="customer/customer.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg fixed-top navbar-glass mx-md-4 mt-md-3 rounded-pill"
+    >
+      <div class="container-fluid px-4">
+        <a
+          class="navbar-brand fw-bold d-flex align-items-center gap-2"
+          href="#"
+        >
+          <i
+            class="bi bi-droplet-fill text-primary"
+            style="font-size: 1.5rem"
+          ></i>
+          <span
+            style="
+              color: var(--primary-dark);
+              font-family: &quot;Poppins&quot;, sans-serif;
+            "
+            >Aqua Flow</span
+          >
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto gap-2 align-items-center">
+            <li class="nav-item">
+              <a href="#features" class="nav-link text-muted fw-medium"
+                >Features</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#testimonials" class="nav-link text-muted fw-medium me-2"
+                >Testimonials</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="login.html" class="btn btn-outline-custom btn-sm px-4"
+                >Log In</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="signup.html"
+                class="btn btn-primary-custom btn-sm px-4 shadow-sm"
+                >Sign Up</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center position-relative">
+      <div class="hero-bg-blob blob-1"></div>
+      <div class="hero-bg-blob blob-2"></div>
+
+      <div class="container position-relative z-1">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-8 fade-in text-lg-start mb-5 mb-lg-0">
+            <span
+              class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2 mb-3 fw-semibold"
+            >
+              <i class="bi bi-stars me-1"></i> #1 Digital Water Khata System
+            </span>
+            <h1 class="hero-title mb-4">
+              Smart Water Management <br />
+              <span class="text-primary">Simplified.</span>
+            </h1>
+            <p class="lead mb-4 text-muted" style="max-width: 600px">
+              The all-in-one platform for water delivery businesses. Automate
+              billing, track fleets in real-time, and give your customers a
+              seamless ordering experience.
+            </p>
+
+            <div
+              class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mb-5"
+            >
+              <a
+                href="admin/admin-dashboard.html"
+                class="btn btn-primary-custom btn-lg shadow-lg"
+              >
+                <i class="bi bi-speedometer2 me-2"></i> Admin Demo
+              </a>
+              <a href="#features" class="btn btn-outline-custom btn-lg">
+                Explore Features
+              </a>
+            </div>
+
+            <div
+              class="d-flex gap-4 justify-content-center justify-content-lg-start text-muted small"
+            >
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success"></i> Free Trial
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success"></i> No Credit
+                Card
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success"></i> Instant
+                Setup
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Image / KPI Preview -->
+          <div class="col-lg-4 fade-in">
+            <div class="position-relative float-anim">
+              <!-- Main Admin Card base -->
+              <div class="glass-card p-4 text-start position-relative z-1">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h6 class="fw-bold mb-0">Daily Snapshot</h6>
+                  <span class="badge bg-success-subtle text-success">Live</span>
+                </div>
+
+                <div class="kpi-preview-card mb-3 p-3 bg-white bg-opacity-50">
+                  <div class="d-flex align-items-center gap-3">
+                    <div
+                      class="bg-primary bg-opacity-10 text-primary p-2 rounded"
+                    >
+                      <i class="bi bi-currency-rupee fs-4"></i>
+                    </div>
+                    <div>
+                      <small class="text-muted d-block">Today's Revenue</small>
+                      <h5 class="fw-bold mb-0">₹ 12,450</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="kpi-preview-card p-3 bg-white bg-opacity-50">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="bg-info bg-opacity-10 text-info p-2 rounded">
+                      <i class="bi bi-droplet-half fs-4"></i>
+                    </div>
+                    <div>
+                      <small class="text-muted d-block"
+                        >Bottles Delivered</small
+                      >
+                      <h5 class="fw-bold mb-0">480 / 500</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decor elements -->
+              <div
+                class="position-absolute top-0 end-0 translate-middle-y bg-white p-3 rounded-3 shadow-sm"
+                style="z-index: 2; right: -20px !important"
+              >
+                <div class="d-flex align-items-center gap-2">
+                  <div
+                    class="spinner-grow spinner-grow-sm text-success"
+                    role="status"
+                  ></div>
+                  <small class="fw-bold">Driver Active</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portal Access Cards (Navigation Hub) moved down -->
+        <div class="row g-4 justify-content-center mt-5 pt-4">
+          <div class="col-md-4 col-sm-6">
+            <a href="admin/admin-dashboard.html" class="text-decoration-none">
+              <div class="glass-card portal-card p-4 h-100 text-center">
+                <i
+                  class="bi bi-speedometer2 portal-icon text-primary d-block"
+                ></i>
+                <h5 class="fw-bold text-dark">Admin Portal</h5>
+                <p class="small text-muted mb-0">
+                  Manage inventory, billing & fleet.
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <a href="driver/driver-dashboard.html" class="text-decoration-none">
+              <div class="glass-card portal-card p-4 h-100 text-center">
+                <i class="bi bi-truck portal-icon text-secondary d-block"></i>
+                <h5 class="fw-bold text-dark">Driver App</h5>
+                <p class="small text-muted mb-0">
+                  Route checklists & offline mode.
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <a href="customer/customer-portal.html" class="text-decoration-none">
+              <div class="glass-card portal-card p-4 h-100 text-center">
+                <i class="bi bi-phone portal-icon text-info d-block"></i>
+                <h5 class="fw-bold text-dark">Customer Login</h5>
+                <p class="small text-muted mb-0">Track orders & view khata.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section
+      id="features"
+      class="py-5 position-relative bg-white bg-opacity-50"
+    >
+      <div class="container py-5">
+        <div class="text-center mb-5 fade-in">
+          <span class="text-uppercase text-primary fw-bold small tracking-wide"
+            >Why Choose Aqua Flow?</span
+          >
+          <h2 class="fw-bold display-6 mt-2">
+            Comprehensive Utility Management
+          </h2>
+          <p class="text-muted">
+            Designed efficiently for every role in your supply chain.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Feature 1: Digital Khata -->
+          <div class="col-md-4 fade-in">
+            <div
+              class="glass-card p-4 h-100 text-center position-relative overflow-hidden group"
+            >
+              <div class="position-absolute top-0 end-0 p-3 opacity-10">
+                <i class="bi bi-journal-check display-1 text-primary"></i>
+              </div>
+              <div class="feature-icon-wrapper text-primary mx-auto">
+                <i class="bi bi-journal-check"></i>
+              </div>
+              <h4>Digital Khata</h4>
+              <p class="text-muted mt-3">
+                Say goodbye to paper registers. Automated daily reconciliation
+                ensures your cash and bottle counts always match.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 2: Smart Routing -->
+          <div class="col-md-4 fade-in">
+            <div
+              class="glass-card p-4 h-100 text-center position-relative overflow-hidden"
+            >
+              <div class="position-absolute top-0 end-0 p-3 opacity-10">
+                <i class="bi bi-map display-1 text-secondary"></i>
+              </div>
+              <div class="feature-icon-wrapper text-secondary mx-auto">
+                <i class="bi bi-map"></i>
+              </div>
+              <h4>Smart Routing</h4>
+              <p class="text-muted mt-3">
+                Optimize delivery paths automatically. Save fuel and time with
+                AI-driven route suggestions for drivers.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 3: Secure Billing -->
+          <div class="col-md-4 fade-in">
+            <div
+              class="glass-card p-4 h-100 text-center position-relative overflow-hidden"
+            >
+              <div class="position-absolute top-0 end-0 p-3 opacity-10">
+                <i class="bi bi-wallet2 display-1 text-info"></i>
+              </div>
+              <div class="feature-icon-wrapper text-info mx-auto">
+                <i class="bi bi-wallet2"></i>
+              </div>
+              <h4>Auto-Billing</h4>
+              <p class="text-muted mt-3">
+                Generate monthly invoices in one click. Track outstanding
+                payments and send automated reminders via SMS.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 4: Inventory (New) -->
+          <div class="col-md-4 fade-in">
+            <div
+              class="glass-card p-4 h-100 text-center position-relative overflow-hidden"
+            >
+              <div class="feature-icon-wrapper text-warning mx-auto">
+                <i class="bi bi-box-seam"></i>
+              </div>
+              <h4>Inventory Tracker</h4>
+              <p class="text-muted mt-3">
+                Real-time bottle tracking. Know exactly how many empty and
+                filled bottles are with customers or in the warehouse.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 5: Feedback (New) -->
+          <div class="col-md-4 fade-in">
+            <div
+              class="glass-card p-4 h-100 text-center position-relative overflow-hidden"
+            >
+              <div class="feature-icon-wrapper text-danger mx-auto">
+                <i class="bi bi-chat-heart"></i>
+              </div>
+              <h4>Feedback System</h4>
+              <p class="text-muted mt-3">
+                Collect ratings and feedback from customers after every delivery
+                to ensure high-quality service.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 6: Analytics (New) -->
+          <div class="col-md-4 fade-in">
+            <div
+              class="glass-card p-4 h-100 text-center position-relative overflow-hidden"
+            >
+              <div class="feature-icon-wrapper text-success mx-auto">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <h4>Business Analytics</h4>
+              <p class="text-muted mt-3">
+                Visual charts and reports to help you understand growth trends,
+                customer retention, and revenue streams.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 bg-white">
+      <div class="container py-5">
+        <div class="text-center mb-5 fade-in">
+          <h2 class="fw-bold">Trusted by Water Suppliers</h2>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8 fade-in">
+            <div
+              id="testimonialCarousel"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner text-center">
+                <div class="carousel-item active">
+                  <div class="py-3">
+                    <i class="bi bi-quote fs-1 text-primary opacity-25"></i>
+                    <p class="fs-4 fst-italic text-dark mb-4">
+                      "The Digital Khata feature saved us hours of manual work
+                      every evening. Driver accountability is at an all-time
+                      high."
+                    </p>
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-3"
+                    >
+                      <div
+                        class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm"
+                        style="width: 50px; height: 50px"
+                      >
+                        RK
+                      </div>
+                      <div class="text-start">
+                        <h6 class="fw-bold mb-0">Rashid Khan</h6>
+                        <small class="text-muted"
+                          >Owner, Blue Springs Water</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="py-3">
+                    <i class="bi bi-quote fs-1 text-primary opacity-25"></i>
+                    <p class="fs-4 fst-italic text-dark mb-4">
+                      "My customers love the app. They can pause delivery when
+                      traveling, which stopped all our wasted trips."
+                    </p>
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-3"
+                    >
+                      <div
+                        class="bg-info rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm"
+                        style="width: 50px; height: 50px"
+                      >
+                        SA
+                      </div>
+                      <div class="text-start">
+                        <h6 class="fw-bold mb-0">Sarah Ahmed</h6>
+                        <small class="text-muted"
+                          >Manager, Pure Life Dist.</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#testimonialCarousel"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon bg-primary rounded-circle p-3"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#testimonialCarousel"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon bg-primary rounded-circle p-3"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section pb-4">
+      <div class="container">
+        <div class="row g-4 mb-5">
+          <div class="col-lg-4">
+            <a class="d-block mb-3 text-decoration-none" href="#">
+              <i class="bi bi-droplet-fill text-primary fs-4"></i>
+              <span class="fs-4 fw-bold text-dark ms-2">Aqua Flow</span>
+            </a>
+            <p class="text-muted small">
+              Empowering water businesses with smart technology. Simple,
+              efficient, and scalable.
+            </p>
+            <div class="d-flex gap-3 mt-4">
+              <a href="#" class="social-btn" aria-label="Twitter"
+                ><i class="bi bi-twitter-x"></i
+              ></a>
+              <a href="#" class="social-btn" aria-label="LinkedIn"
+                ><i class="bi bi-linkedin"></i
+              ></a>
+              <a href="#" class="social-btn" aria-label="Instagram"
+                ><i class="bi bi-instagram"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h6 class="fw-bold mb-3">Product</h6>
+            <ul class="list-unstyled small text-muted d-flex flex-column gap-2">
+              <li>
+                <a href="#" class="text-decoration-none text-muted">Features</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-muted">Pricing</a>
+              </li>
+              <li>
+                <a
+                  href="driver/driver-dashboard.html"
+                  class="text-decoration-none text-muted"
+                  >Driver Demo</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h6 class="fw-bold mb-3">Company</h6>
+            <ul class="list-unstyled small text-muted d-flex flex-column gap-2">
+              <li>
+                <a href="#" class="text-decoration-none text-muted">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-muted">Careers</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-muted">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h6 class="fw-bold mb-3">Stay Updated</h6>
+            <form class="d-flex gap-2">
+              <input
+                type="email"
+                class="form-control form-control-custom"
+                placeholder="Enter your email"
+                aria-label="Email for newsletter"
+              />
+              <button class="btn btn-primary-custom" type="button">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="border-top pt-4 text-center">
+          <small class="text-muted"
+            >&copy; 2024 Aqua Flow. All rights reserved.</small
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="database.js"></script>
+    <script src="customer/customer.js"></script>
+  </body>
+</html>
